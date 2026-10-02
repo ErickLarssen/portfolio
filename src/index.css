@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-950 text-mist-100 font-body overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* O cursor personalizado só substitui o nativo em mouse/trackpad.
+     Em toque, teclado ou movimento reduzido, o cursor do sistema continua. */
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    html.has-custom-cursor,
+    html.has-custom-cursor * {
+      cursor: none;
+    }
+    html.has-custom-cursor input,
+    html.has-custom-cursor textarea {
+      cursor: text;
+    }
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-4 outline-gold rounded-sm;
+  }
+
+  ::selection {
+    @apply bg-gold text-ink-950;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { @apply bg-ink-900; }
+  ::-webkit-scrollbar-thumb { @apply bg-gold rounded-full; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1.5px rgba(244, 242, 238, 0.85);
+    color: transparent;
+  }
+  .text-stroke-gold {
+    -webkit-text-stroke: 1.5px #d6a44f;
+    color: transparent;
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(90deg, #b8862f, #e2b062);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
