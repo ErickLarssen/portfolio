@@ -202,8 +202,14 @@ export const story = [
 export const testimonials = [
   {
     name: 'Toni',
-    role: 'Supervisor de T.I · Secretária da Educação do Estado de São Paulo',
+    role: 'Supervisor de T.I · Secretaria da Educação do Estado de São Paulo',
     project: 'ProaDesk',            // opcional
     quote: 'Erick fez um sistema muito bom, atendeu todas as necessidades, nenhum estagiário PROATI teve essa iniciativa antes.',
+  },
+  {
+    name: 'Tayna Leme',
+    role: 'CEO · Tay Doces',
+    project: 'Identidade Visual para a Tay Doces',            // opcional
+    quote: 'Serviço excelente, fez do jeitinho que eu queria e ainda conseguiu aprimorar coisas que eu nem imaginava que teria como colocar, foi muito prestativo em conversar comigo e ver todos os detalhes e mandar várias sugestões pra chegar no melhor resultado.',
   },
 ]

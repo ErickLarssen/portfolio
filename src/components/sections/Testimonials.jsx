@@ -102,7 +102,8 @@ export default function Testimonials() {
                         <ScrollReveal
                             key={item.name}
                             delay={i * 0.1}
-                            className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
+                            className={`w-full sm:w-[calc(50%-12px)] ${testimonials.length <= 3 ? 'lg:w-[calc(33.333%-16px)]' : 'lg:w-[calc(25%-18px)]'
+                                }`}
                         >
                             <TestimonialCard item={item} />
                         </ScrollReveal>

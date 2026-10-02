@@ -33,13 +33,12 @@ export default function App() {
           <StorySection />
           <CaseStudies />
           <StatsSection />
+          <Testimonials />
           <ServicesGrid />
           <ProcessTimeline />
           <TechStack />
           <FAQSection />
           <CTASection />
-          <Testimonials />
-          <ServicesGrid />
         </main>
 
         <Footer />

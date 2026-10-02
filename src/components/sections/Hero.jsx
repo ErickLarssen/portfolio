@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight } from 'lucide-react'
 import MagneticButton from '../ui/MagneticButton'
 import AnimatedCounter from '../ui/AnimatedCounter'
 import { EagleMark } from '../ui/Brand'
+import HeroPortrait from '../ui/HeroPortrait'
 import { profile, projects } from '../../data/content'
 
 export default function Hero() {
@@ -42,6 +43,7 @@ export default function Hero() {
         className="absolute top-0 left-0 w-[800px] h-[800px] bg-gold/10 rounded-full blur-[120px] pointer-events-none transition-transform duration-1000 ease-out z-0"
       />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)] pointer-events-none z-0" />
+      <HeroPortrait containerRef={containerRef} />
       <div className="grain absolute inset-0 z-[1]" />
 
       <motion.div style={{ opacity, scale, y }} className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-start">
@@ -122,7 +124,7 @@ export default function Hero() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6, duration: 1 }}
-        className="absolute top-28 right-8 md:right-16 lg:right-28 w-40 h-40 hidden md:flex items-center justify-center z-10"
+        className="absolute top-28 right-8 md:right-12 lg:right-16 w-32 h-32 hidden md:flex items-center justify-center z-10"
       >
         <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full animate-spin-slow" aria-hidden="true">
           <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
@@ -130,7 +132,7 @@ export default function Hero() {
             <textPath href="#circlePath">Design · Código · Full-Stack · Erick Silva · </textPath>
           </text>
         </svg>
-        <EagleMark className="w-16 h-16" />
+        <EagleMark className="w-12 h-12" />
       </motion.div>
 
       <div className="absolute bottom-8 left-6 md:left-12 z-20 hidden sm:block">
