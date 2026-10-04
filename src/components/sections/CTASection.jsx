@@ -16,16 +16,16 @@ export default function CTASection() {
     <section className="relative min-h-screen bg-ink-950 flex flex-col justify-center items-center overflow-hidden py-32" id="contato">
       <div className="absolute inset-0 bg-gradient-to-br from-ink-700 via-ink-900 to-ink-950 opacity-60" />
       <div className="grain absolute inset-0 opacity-40" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(214,164,79,0.09),transparent)] rounded-full blur-[50px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(214,164,79,0.09),transparent)] rounded-full pointer-events-none" />
       <motion.div
         animate={{ y: [0, -100, 0], x: [0, 50, 0] }}
         transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-20 left-[10%] w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-gold rounded-full opacity-[0.03] blur-3xl"
+        className="absolute -top-20 left-[10%] w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full bg-[radial-gradient(circle,rgba(214,164,79,0.07)_0%,transparent_70%)] pointer-events-none will-change-transform"
       />
       <motion.div
         animate={{ y: [0, 100, 0], x: [0, -50, 0] }}
         transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        className="absolute -bottom-40 right-[10%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-ember rounded-full opacity-[0.03] blur-3xl"
+        className="absolute -bottom-40 right-[10%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] rounded-full bg-[radial-gradient(circle,rgba(240,137,42,0.07)_0%,transparent_70%)] pointer-events-none will-change-transform"
       />
 
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
