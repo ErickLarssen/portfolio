@@ -31,9 +31,8 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          scrolled ? 'backdrop-blur-xl bg-ink-950/80 border-b border-white/5 py-3' : 'bg-transparent py-5'
-        }`}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? 'backdrop-blur-xl bg-ink-950/80 border-b border-white/5 py-3' : 'bg-transparent py-5'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <a href="#inicio" className="flex items-center gap-3 z-50" aria-label="Erick Silva, início">
@@ -56,9 +55,10 @@ export default function Navbar() {
               href={profile.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="px-6 py-2.5 rounded-full border border-gold text-gold text-sm font-medium hover:bg-gold hover:text-ink-950 transition-colors"
+              className="gap-2 px-6 py-2.5 rounded-full border border-gold text-gold text-sm font-medium hover:bg-gold hover:text-ink-950 transition-colors"
             >
-              Pedir orçamento
+              <WhatsappIcon size={16} />
+              Vamos conversar
             </MagneticButton>
           </div>
 

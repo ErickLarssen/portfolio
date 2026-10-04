@@ -15,10 +15,12 @@
   /* O cursor personalizado só substitui o nativo em mouse/trackpad.
      Em toque, teclado ou movimento reduzido, o cursor do sistema continua. */
   @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+
     html.has-custom-cursor,
     html.has-custom-cursor * {
       cursor: none;
     }
+
     html.has-custom-cursor input,
     html.has-custom-cursor textarea {
       cursor: text;
@@ -33,13 +35,23 @@
     @apply bg-gold text-ink-950;
   }
 
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { @apply bg-ink-900; }
-  ::-webkit-scrollbar-thumb { @apply bg-gold rounded-full; }
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-ink-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold rounded-full;
+  }
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
+  .text-balance {
+    text-wrap: balance;
+  }
 
   .grain::after {
     content: '';
@@ -51,9 +63,16 @@
   }
 
   .text-stroke {
-    -webkit-text-stroke: 1.5px rgba(244, 242, 238, 0.85);
+    -webkit-text-stroke: 1px rgba(244, 242, 238, 0.85);
     color: transparent;
   }
+
+  @media (min-width: 768px) {
+    .text-stroke {
+      -webkit-text-stroke-width: 1.5px;
+    }
+  }
+
   .text-stroke-gold {
     -webkit-text-stroke: 1.5px #d6a44f;
     color: transparent;

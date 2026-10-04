@@ -3,6 +3,10 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      // Telas baixas (ex.: notebook 15" com zoom de 125% no Windows ≈ 1536×690)
+      screens: {
+        short: { raw: '(max-height: 820px)' },
+      },
       colors: {
         // Pretos neutros e levemente quentes (base do cartão de visitas)
         ink: {
@@ -35,6 +39,8 @@ export default {
       },
       fontFamily: {
         display: ['"Zodiak"', 'Georgia', 'serif'],
+        // Título da abertura: alternativa gratuita inspirada na Eurostile Extended
+        tech: ['Michroma', '"Eurostile Extended"', 'system-ui', 'sans-serif'],
         body: ['"Satoshi"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
