@@ -1,24 +1,27 @@
 import { motion } from 'framer-motion'
 import { Globe, LayoutDashboard, ShoppingBag, PenTool, ArrowUpRight } from 'lucide-react'
-import { services, profile } from '../../data/content'
+import { useContent } from '../../i18n/context'
 import ScrollReveal from '../ui/ScrollReveal'
 
 const icons = { Globe, LayoutDashboard, ShoppingBag, PenTool }
 
 export default function ServicesGrid() {
+  const { services, profile, ui } = useContent()
+  const t = ui.services
+
   return (
     <section className="bg-ink-900 py-28 md:py-36 relative" id="servicos">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <ScrollReveal className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
           <div>
-            <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">Soluções digitais para todos</p>
+            <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">{t.eyebrow}</p>
             <h2 className="font-display text-5xl md:text-7xl tracking-tight">
-              O que posso <br className="hidden md:block" />
-              <span className="italic">fazer por você.</span>
+              {t.title} <br className="hidden md:block" />
+              <span className="italic">{t.titleAccent}</span>
             </h2>
           </div>
           <p className="text-mist-900 md:max-w-md md:justify-self-end leading-relaxed">
-            Para empresas, autônomos e projetos pessoais. Você não precisa entender de tecnologia: eu cuido da parte técnica e explico tudo pelo caminho.
+            {t.intro}
           </p>
         </ScrollReveal>
 
@@ -27,7 +30,7 @@ export default function ServicesGrid() {
             const Icon = icons[service.icon]
             return (
               <motion.div
-                key={service.title}
+                key={service.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
@@ -55,7 +58,7 @@ export default function ServicesGrid() {
 
         <ScrollReveal className="mt-10 flex justify-center">
           <a href={profile.whatsapp} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-2 font-mono text-sm text-gold hover:text-gold-light">
-            Conte sua ideia e receba uma proposta
+            {t.cta}
             <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </ScrollReveal>

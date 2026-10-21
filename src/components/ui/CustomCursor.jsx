@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { useContent } from '../../i18n/context'
 
 // Cursor personalizado. Só é ativado em dispositivos com mouse e quando o
 // usuário não pediu movimento reduzido; nos demais casos o cursor nativo fica.
@@ -11,6 +12,7 @@ const canUseCustomCursor = () =>
 export default function CustomCursor() {
   const [enabled] = useState(canUseCustomCursor)
   const [cursorState, setCursorState] = useState('default')
+  const { ui } = useContent()
 
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
@@ -59,7 +61,7 @@ export default function CustomCursor() {
           animate={cursorState}
           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
         >
-          {cursorState === 'view' && <span className="text-mist-100">ABRIR</span>}
+          {cursorState === 'view' && <span className="text-mist-100">{ui.cursorOpen}</span>}
         </motion.div>
       </motion.div>
       <motion.div aria-hidden="true" className="fixed top-0 left-0 z-[9998] pointer-events-none" style={{ x: trailX, y: trailY, mixBlendMode: 'difference' }}>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Quote } from 'lucide-react'
-import { testimonials } from '../../data/content'
+import { useContent } from '../../i18n/context'
 import ScrollReveal from '../ui/ScrollReveal'
 
 // Avatar em pixels gerado a partir do nome (sempre o mesmo desenho para o mesmo nome).
@@ -27,6 +27,7 @@ function PixelAvatar({ seed }) {
 
 function TestimonialCard({ item }) {
     const [flipped, setFlipped] = useState(false)
+    const t = useContent().ui.testimonials
     const toggle = () => setFlipped((f) => !f)
 
     return (
@@ -34,7 +35,7 @@ function TestimonialCard({ item }) {
             role="button"
             tabIndex={0}
             aria-pressed={flipped}
-            aria-label={`Depoimento de ${item.name}. Ative para ${flipped ? 'voltar' : 'ler'}.`}
+            aria-label={t.card(item.name, flipped)}
             // No mouse o hover já vira o card; o clique só vira em telas de toque.
             onClick={() => !window.matchMedia('(hover: hover)').matches && toggle()}
             onKeyDown={(e) => {
@@ -57,7 +58,7 @@ function TestimonialCard({ item }) {
                     <p className="font-mono text-sm text-gold mt-1">{item.role}</p>
                     {item.project && (
                         <p className="font-mono text-[11px] text-mist-900 uppercase tracking-widest mt-auto pt-4">
-                            Projeto · {item.project}
+                            {t.project} · {item.project}
                         </p>
                     )}
                 </div>
@@ -71,6 +72,9 @@ function TestimonialCard({ item }) {
                     <p className="mt-auto pt-6 font-mono text-xs uppercase tracking-widest opacity-80">
                         {item.name} · {item.role}
                     </p>
+                    {t.translated && (
+                        <p className="mt-2 font-mono text-[10px] uppercase tracking-widest opacity-60">{t.translated}</p>
+                    )}
                 </div>
             </div>
         </div>
@@ -78,6 +82,9 @@ function TestimonialCard({ item }) {
 }
 
 export default function Testimonials() {
+    const { testimonials, ui } = useContent()
+    const t = ui.testimonials
+
     // Sem depoimentos cadastrados, a seção simplesmente não aparece.
     if (!testimonials.length) return null
 
@@ -86,14 +93,14 @@ export default function Testimonials() {
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <ScrollReveal className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div>
-                        <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">Depoimentos</p>
+                        <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">{t.eyebrow}</p>
                         <h2 className="font-display text-5xl md:text-7xl tracking-tight">
-                            Quem já <span className="italic">trabalhou comigo.</span>
+                            {t.title} <span className="italic">{t.titleAccent}</span>
                         </h2>
                     </div>
                     <p className="font-mono text-xs text-mist-900 md:text-right">
-                        <span className="hidden [@media(hover:hover)]:inline">Passe o mouse</span>
-                        <span className="[@media(hover:hover)]:hidden">Toque</span> em um card para ler.
+                        <span className="hidden [@media(hover:hover)]:inline">{t.hintHover}</span>
+                        <span className="[@media(hover:hover)]:hidden">{t.hintTouch}</span> {t.hintRest}
                     </p>
                 </ScrollReveal>
 

@@ -5,11 +5,13 @@ import MagneticButton from '../ui/MagneticButton'
 import AnimatedCounter from '../ui/AnimatedCounter'
 import { EagleMark } from '../ui/Brand'
 import HeroPortrait from '../ui/HeroPortrait'
-import { profile, projects } from '../../data/content'
+import { useContent } from '../../i18n/context'
 
 export default function Hero() {
   const containerRef = useRef(null)
   const blobRef = useRef(null)
+  const { profile, projects, ui } = useContent()
+  const t = ui.hero
 
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] })
   const fade = interpolate([0, 0.8], [1, 0], { clamp: true })
@@ -26,11 +28,7 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  const lines = [
-    { words: ['Transformo', 'ideias'] },
-    { words: ['em', 'experiências'], stroke: true },
-    { words: ['digitais', 'únicas.'], gold: true },
-  ]
+  const lines = t.lines
   let wordIndex = 0
 
   return (
@@ -49,7 +47,7 @@ export default function Hero() {
           {profile.name} · {profile.role}
         </p>
 
-        <h1 className="font-tech text-[clamp(1.6rem,9.6vw,2.6rem)] md:text-[min(calc((100vw-6rem)/11.4),11vh,6.5rem)] leading-[1.08] tracking-[-0.02em] mb-10 short:mb-6 w-full [perspective:1000px]">
+        <h1 className="font-tech text-[clamp(1.6rem,9.6vw,2.6rem)] md:text-[min(calc((100vw-6rem)/var(--hero-fit)),11vh,6.5rem)] leading-[1.08] tracking-[-0.02em] mb-10 short:mb-6 w-full [perspective:1000px]" style={{ '--hero-fit': t.fit }}>
           {lines.map((line, li) => (
             <span key={li} className="inline md:block md:pb-1">
               {line.words.map((word) => {
@@ -77,7 +75,7 @@ export default function Hero() {
           transition={{ delay: 1.1, duration: 1 }}
           className="text-mist-700 text-lg md:text-xl max-w-xl mb-12 short:mb-8 short:text-lg leading-relaxed"
         >
-          Sou desenvolvedor full-stack com olhar de designer. Crio sites, sistemas e lojas online que unem visual premium e código sólido, do primeiro rascunho ao deploy.
+          {t.intro}
         </motion.p>
 
         <motion.div
@@ -94,14 +92,14 @@ export default function Hero() {
             className="bg-gold text-ink-950 font-body font-bold px-8 py-4 short:py-3 rounded-full text-lg hover:shadow-[0_0_30px_rgba(214,164,79,0.35)] transition-shadow"
             data-cursor="hover"
           >
-            Iniciar um projeto
+            {t.primary}
           </MagneticButton>
           <a
             href="#recrutadores"
             className="group border border-white/20 text-mist-700 hover:text-mist-100 hover:border-white/40 hover:bg-white/5 font-body font-medium px-8 py-4 short:py-3 rounded-full text-lg transition-all inline-flex items-center gap-2"
             data-cursor="hover"
           >
-            Sou recrutador
+            {t.recruiter}
             <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </motion.div>
@@ -117,7 +115,7 @@ export default function Hero() {
         <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full animate-spin-slow" aria-hidden="true">
           <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
           <text className="font-mono text-[8.4px] fill-mist-700 tracking-[0.2em] uppercase">
-            <textPath href="#circlePath">Design · Código · Full-Stack · Erick Silva · </textPath>
+            <textPath href="#circlePath">{t.ring}</textPath>
           </text>
         </svg>
         <EagleMark className="w-12 h-12" />
@@ -128,13 +126,13 @@ export default function Hero() {
           <span className="font-display text-3xl text-gold">
             <AnimatedCounter end={projects.length} />
           </span>
-          <span className="font-mono text-xs text-mist-900 tracking-wider">projetos no ar</span>
+          <span className="font-mono text-xs text-mist-900 tracking-wider">{t.live}</span>
         </div>
       </div>
 
       <motion.a
         href="#sobre"
-        aria-label="Rolar para a trajetória"
+        aria-label={t.scroll}
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 hover:text-white/70 z-20"

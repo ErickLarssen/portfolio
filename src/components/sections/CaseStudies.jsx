@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ArrowUpRight, Check } from 'lucide-react'
-import { projects } from '../../data/content'
+import { useContent } from '../../i18n/context'
 import ScrollReveal from '../ui/ScrollReveal'
 import { GithubIcon } from '../ui/Brand'
 import proadesk from '../../assets/projects/proadesk.webp'
@@ -12,6 +12,7 @@ import cinerick from '../../assets/projects/cinerick.webp'
 const images = { proadesk, briefing, previtempo, cinerick }
 
 function TiltShot({ project }) {
+  const { ui } = useContent()
   const ref = useRef(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -38,7 +39,7 @@ function TiltShot({ project }) {
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
         className="group relative block rounded-xl overflow-hidden border border-white/10 bg-ink-800 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]"
         data-cursor="view"
-        aria-label={`Abrir ${project.name} em nova aba`}
+        aria-label={ui.projects.open(project.name)}
       >
         <div className={`absolute inset-0 bg-gradient-to-br ${project.accent} to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500`} />
         {/* Barra de navegador */}
@@ -50,7 +51,7 @@ function TiltShot({ project }) {
         </div>
         <img
           src={images[project.image]}
-          alt={`Tela do projeto ${project.name}`}
+          alt={ui.projects.screenshot(project.name)}
           loading="lazy"
           className="relative w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]"
           style={{ transform: 'translateZ(20px)' }}
@@ -61,6 +62,7 @@ function TiltShot({ project }) {
 }
 
 function ProjectRow({ project, index }) {
+  const t = useContent().ui.projects
   const reverse = index % 2 === 1
   return (
     <article className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
@@ -79,11 +81,11 @@ function ProjectRow({ project, index }) {
 
         <dl className="space-y-4 mb-6">
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-widest text-mist-900 mb-1">O problema</dt>
+            <dt className="font-mono text-[10px] uppercase tracking-widest text-mist-900 mb-1">{t.problem}</dt>
             <dd className="text-mist-700 leading-relaxed">{project.problem}</dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-widest text-mist-900 mb-1">O que eu fiz</dt>
+            <dt className="font-mono text-[10px] uppercase tracking-widest text-mist-900 mb-1">{t.solution}</dt>
             <dd className="text-mist-500 leading-relaxed">{project.solution}</dd>
           </div>
         </dl>
@@ -109,10 +111,10 @@ function ProjectRow({ project, index }) {
 
         <div className="flex flex-wrap gap-6 font-mono text-sm">
           <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light">
-            Ver projeto <ArrowUpRight size={16} />
+            {t.view} <ArrowUpRight size={16} />
           </a>
           <a href={project.code} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-mist-900 hover:text-mist-100">
-            <GithubIcon size={16} /> Código
+            <GithubIcon size={16} /> {t.code}
           </a>
         </div>
       </ScrollReveal>
@@ -121,18 +123,20 @@ function ProjectRow({ project, index }) {
 }
 
 export default function CaseStudies() {
+  const { projects, ui } = useContent()
+  const t = ui.projects
   return (
     <section className="bg-ink-950 py-28 md:py-36" id="projetos">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <ScrollReveal className="mb-20 md:mb-28 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
-            <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">Projetos selecionados</p>
+            <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">{t.eyebrow}</p>
             <h2 className="font-display text-5xl md:text-7xl tracking-tight">
-              Provas <span className="italic text-gold-gradient">no ar.</span>
+              {t.title} <span className="italic text-gold-gradient">{t.titleAccent}</span>
             </h2>
           </div>
           <p className="text-mist-900 max-w-sm leading-relaxed">
-            Do sistema em uso numa escola pública ao projeto de paixão: cada um nasceu de um problema real.
+            {t.intro}
           </p>
         </ScrollReveal>
 

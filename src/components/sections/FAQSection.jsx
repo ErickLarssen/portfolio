@@ -2,11 +2,12 @@ import * as Accordion from '@radix-ui/react-accordion'
 import { Plus, Minus } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { faqs } from '../../data/content'
+import { useContent } from '../../i18n/context'
 import ScrollReveal from '../ui/ScrollReveal'
 
 export default function FAQSection() {
   const [value, setValue] = useState('')
+  const { faqs, ui } = useContent()
 
   return (
     <section className="bg-ink-950 py-32 border-b border-white/5" id="duvidas">
@@ -19,10 +20,10 @@ export default function FAQSection() {
                 FAQ
               </h2>
               <div className="relative -mt-16 md:-mt-20 ml-2">
-                <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">Dúvidas comuns</p>
-                <h3 className="font-display text-4xl md:text-5xl mb-6">Perguntas que todo cliente faz.</h3>
+                <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">{ui.faq.eyebrow}</p>
+                <h3 className="font-display text-4xl md:text-5xl mb-6">{ui.faq.title}</h3>
                 <p className="text-mist-900 font-body text-lg leading-relaxed max-w-sm">
-                  Não achou sua dúvida? Me chame no WhatsApp e eu respondo pessoalmente.
+                  {ui.faq.intro}
                 </p>
               </div>
             </div>

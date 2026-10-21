@@ -1,7 +1,7 @@
 import { useId, useRef } from 'react'
 import { motion, useScroll, useTransform, interpolate } from 'framer-motion'
 import { eagles } from '../../data/eagles'
-import { story } from '../../data/content'
+import { useContent } from '../../i18n/context'
 
 // Trajetória: a águia coroada se redesenha a cada fase da marca.
 // O progresso da rolagem dentro da seção controla tudo:
@@ -109,11 +109,11 @@ function EagleLayer({ stage, index, progress }) {
   )
 }
 
-function Chapter({ chapter, index, progress }) {
+function Chapter({ chapter, index, total, progress }) {
   const start = index * SEG
   const end = start + SEG
   const isFirst = index === 0
-  const isLast = index === story.length - 1
+  const isLast = index === total - 1
   // Os intervalos precisam ficar entre 0 e 1 e em ordem crescente
   // (o framer-motion os converte em animações nativas do navegador).
   const opacity = useRange(
@@ -152,6 +152,7 @@ function RailItem({ index, progress, label }) {
 export default function StorySection() {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+  const { story, ui } = useContent()
 
   const plate = useTransform(
     scrollYProgress,
@@ -162,10 +163,10 @@ export default function StorySection() {
   const glow = useRange(scrollYProgress, [SEG * 1.9, SEG * 2.3], [0, 1])
 
   return (
-    <section ref={ref} className="relative bg-ink-950 h-[360vh]" id="sobre" aria-label="Minha trajetória">
+    <section ref={ref} className="relative bg-ink-950 h-[360vh]" id="sobre" aria-label={ui.story.label}>
       <div className="sticky top-0 h-screen overflow-hidden">
         <div className="max-w-7xl mx-auto h-full px-6 md:px-12 pt-24 pb-10 flex flex-col">
-          <p className="font-mono text-xs text-mist-900 uppercase tracking-widest mb-6 md:mb-0">A trajetória · uma águia, três fases</p>
+          <p className="font-mono text-xs text-mist-900 uppercase tracking-widest mb-6 md:mb-0">{ui.story.eyebrow}</p>
 
           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-center min-h-0">
             {/* Palco da águia */}
@@ -186,7 +187,7 @@ export default function StorySection() {
             {/* Capítulos */}
             <div className="relative h-[34vh] md:h-[52vh] md:order-1">
               {story.map((chapter, i) => (
-                <Chapter key={chapter.key} chapter={chapter} index={i} progress={scrollYProgress} />
+                <Chapter key={chapter.key} chapter={chapter} index={i} total={story.length} progress={scrollYProgress} />
               ))}
             </div>
           </div>

@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ScrollReveal from '../ui/ScrollReveal'
-import { process } from '../../data/content'
+import { useContent } from '../../i18n/context'
 
 function StepItem({ step, index }) {
   const { ref, inView } = useInView({ threshold: 0.5 })
@@ -49,6 +49,7 @@ function StepItem({ step, index }) {
 
 export default function ProcessTimeline() {
   const containerRef = useRef(null)
+  const { process, ui } = useContent()
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start center', 'end end'] })
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
 
@@ -56,9 +57,9 @@ export default function ProcessTimeline() {
     <section ref={containerRef} className="bg-ink-950 relative" id="processo">
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-28 md:pt-36 pb-8">
         <ScrollReveal>
-          <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">Como funciona</p>
+          <p className="font-mono text-xs text-gold uppercase tracking-widest mb-4">{ui.process.eyebrow}</p>
           <h2 className="font-display text-5xl md:text-7xl tracking-tight max-w-3xl">
-            Da ideia ao ar, <span className="italic">sem mistério.</span>
+            {ui.process.title} <span className="italic">{ui.process.titleAccent}</span>
           </h2>
         </ScrollReveal>
       </div>
@@ -73,7 +74,7 @@ export default function ProcessTimeline() {
         </div>
         <div className="flex-1 pb-24">
           {process.map((step, index) => (
-            <StepItem key={step.title} step={step} index={index} />
+            <StepItem key={step.label} step={step} index={index} />
           ))}
         </div>
       </div>

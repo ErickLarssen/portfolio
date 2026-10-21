@@ -1,8 +1,12 @@
 import { EagleMark, GithubIcon, LinkedinIcon, WhatsappIcon } from '../ui/Brand'
-import { profile, projects } from '../../data/content'
+import { useContent } from '../../i18n/context'
+
+const links = ['sobre', 'servicos', 'processo', 'recrutadores', 'duvidas']
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const { profile, projects, ui } = useContent()
+  const t = ui.footer
 
   return (
     <footer className="bg-ink-950 border-t border-white/5 pt-20 pb-8">
@@ -24,18 +28,16 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-mono text-xs text-gold uppercase tracking-widest mb-6">Navegação</h4>
+            <h4 className="font-mono text-xs text-gold uppercase tracking-widest mb-6">{t.nav}</h4>
             <ul className="flex flex-col gap-3 text-sm text-mist-500">
-              <li><a href="#sobre" className="hover:text-mist-100 transition-colors">Trajetória</a></li>
-              <li><a href="#servicos" className="hover:text-mist-100 transition-colors">Serviços</a></li>
-              <li><a href="#processo" className="hover:text-mist-100 transition-colors">Como funciona</a></li>
-              <li><a href="#recrutadores" className="hover:text-mist-100 transition-colors">Para recrutadores</a></li>
-              <li><a href="#duvidas" className="hover:text-mist-100 transition-colors">Dúvidas</a></li>
+              {links.map((id) => (
+                <li key={id}><a href={`#${id}`} className="hover:text-mist-100 transition-colors">{t.links[id]}</a></li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-mono text-xs text-gold uppercase tracking-widest mb-6">Projetos</h4>
+            <h4 className="font-mono text-xs text-gold uppercase tracking-widest mb-6">{t.projects}</h4>
             <ul className="flex flex-col gap-3 text-sm text-mist-500">
               {projects.map((p) => (
                 <li key={p.id}>
@@ -46,19 +48,19 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-mono text-xs text-gold uppercase tracking-widest mb-6">Contato</h4>
+            <h4 className="font-mono text-xs text-gold uppercase tracking-widest mb-6">{t.contact}</h4>
             <div className="flex flex-col gap-3 text-sm text-mist-500">
               <a href={profile.whatsapp} target="_blank" rel="noreferrer" className="hover:text-mist-100 transition-colors">{profile.phoneDisplay}</a>
               <a href={`mailto:${profile.email}`} className="hover:text-mist-100 transition-colors break-all">{profile.email}</a>
               <span className="text-mist-900">{profile.site}</span>
-              <span className="text-mist-900">São Paulo, Brasil · atendo todo o país</span>
+              <span className="text-mist-900">{profile.location}</span>
             </div>
           </div>
         </div>
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-mist-900">
-          <p>© {year} Erick Silva. Todos os direitos reservados.</p>
-          <p>Desenhado e codificado por mim, do logo ao deploy.</p>
+          <p>© {year} Erick Silva. {t.rights}</p>
+          <p>{t.signature}</p>
         </div>
       </div>
     </footer>

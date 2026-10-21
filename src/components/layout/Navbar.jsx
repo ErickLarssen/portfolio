@@ -2,22 +2,18 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import MagneticButton from '../ui/MagneticButton'
+import LanguageToggle from '../ui/LanguageToggle'
 import { EagleMark, GithubIcon, LinkedinIcon, WhatsappIcon } from '../ui/Brand'
-import { profile } from '../../data/content'
+import { useContent } from '../../i18n/context'
 
-const navLinks = [
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Projetos', href: '#projetos' },
-  { label: 'Serviços', href: '#servicos' },
-  { label: 'Processo', href: '#processo' },
-  { label: 'Recrutadores', href: '#recrutadores' },
-  { label: 'Contato', href: '#contato' },
-]
+const sections = ['sobre', 'projetos', 'servicos', 'processo', 'recrutadores', 'contato']
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const { scrollY } = useScroll()
+  const { profile, ui } = useContent()
+  const navLinks = sections.map((id) => ({ label: ui.nav.links[id], href: `#${id}` }))
 
   useMotionValueEvent(scrollY, 'change', (latest) => setScrolled(latest > 80))
 
@@ -35,12 +31,12 @@ export default function Navbar() {
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          <a href="#inicio" className="flex items-center gap-3 z-50" aria-label="Erick Silva, início">
+          <a href="#inicio" className="flex items-center gap-3 z-50" aria-label={ui.nav.home}>
             <EagleMark className="w-9 h-9" title="" />
-            <span className="font-body text-sm font-bold tracking-[0.25em] uppercase text-mist-100">Erick Silva</span>
+            <span className="font-body text-sm font-bold tracking-[0.25em] uppercase text-mist-100 whitespace-nowrap">Erick Silva</span>
           </a>
 
-          <nav className="hidden lg:flex items-center gap-8" aria-label="Principal">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-8" aria-label={ui.nav.main}>
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} className="font-body text-sm text-mist-900 hover:text-mist-100 transition-colors relative group">
                 {link.label}
@@ -49,27 +45,31 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
+            <LanguageToggle />
             <MagneticButton
               as="a"
               href={profile.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="gap-2 px-6 py-2.5 rounded-full border border-gold text-gold text-sm font-medium hover:bg-gold hover:text-ink-950 transition-colors"
+              className="gap-2 px-5 xl:px-6 py-2.5 whitespace-nowrap rounded-full border border-gold text-gold text-sm font-medium hover:bg-gold hover:text-ink-950 transition-colors"
             >
               <WhatsappIcon size={16} />
-              Vamos conversar
+              {ui.nav.cta}
             </MagneticButton>
           </div>
 
-          <button
-            className="lg:hidden z-50 text-mist-100 p-2"
-            onClick={() => setOpen(!open)}
-            aria-label={open ? 'Fechar menu' : 'Abrir menu'}
-            aria-expanded={open}
-          >
-            {open ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          <div className="lg:hidden z-50 flex items-center gap-3">
+            <LanguageToggle />
+            <button
+              className="text-mist-100 p-2"
+              onClick={() => setOpen(!open)}
+              aria-label={open ? ui.nav.closeMenu : ui.nav.openMenu}
+              aria-expanded={open}
+            >
+              {open ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -81,7 +81,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-ink-900 z-40 flex flex-col justify-center px-6"
           >
-            <nav className="flex flex-col gap-5 mt-10" aria-label="Menu">
+            <nav className="flex flex-col gap-5 mt-10" aria-label={ui.nav.menu}>
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.href}
