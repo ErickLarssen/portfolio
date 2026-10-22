@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://ericksilva.dev">
+<a href="https://ericksilva.site">
   <img src="./public/favicon.svg" width="96" alt="Monograma ES — águia coroada de Erick Silva" />
 </a>
 
@@ -12,13 +12,13 @@ Um portfólio que fala com dois públicos: quem avalia código e quem nunca escr
 
 <br/>
 
-[![Site](https://img.shields.io/badge/ericksilva.dev-D6A44F?style=for-the-badge&logo=googlechrome&logoColor=09090B)](https://ericksilva.dev)
+[![Site](https://img.shields.io/badge/ericksilva.site-D6A44F?style=for-the-badge&logo=googlechrome&logoColor=09090B)](https://ericksilva.site)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-16161A?style=for-the-badge&logo=linkedin&logoColor=D6A44F)](https://www.linkedin.com/in/ericklarssen)
 [![GitHub](https://img.shields.io/badge/ErickLarssen-16161A?style=for-the-badge&logo=github&logoColor=D6A44F)](https://github.com/ErickLarssen)
 
 <br/>
 
-<a href="https://ericksilva.dev">
+<a href="https://ericksilva.site">
   <img src="./docs/showcase.webp" width="100%" alt="Abertura do portfólio no computador e no celular: 'Transformo ideias em experiências digitais únicas.' com retrato em preto e branco ao fundo" />
 </a>
 
@@ -170,7 +170,7 @@ npm run dev        # http://localhost:5173
 
 **Vamos construir algo com propósito?**
 
-[ericksilva.dev](https://ericksilva.dev) · [LinkedIn](https://www.linkedin.com/in/ericklarssen) · [GitHub](https://github.com/ErickLarssen)
+[ericksilva.site](https://ericksilva.site) · [LinkedIn](https://www.linkedin.com/in/ericklarssen) · [GitHub](https://github.com/ErickLarssen)
 
 <sub>Desenhado e codificado por Erick Silva, do logo ao deploy.</sub>
 

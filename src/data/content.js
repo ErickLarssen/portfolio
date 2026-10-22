@@ -12,7 +12,7 @@ const profile = {
   since: 2022,
   email: 'ericklarssen@gmail.com',
   whatsappNumber: '5511962121515',
-  site: 'www.ericksilva.dev',
+  site: 'ericksilva.site',
   github: 'https://github.com/ErickLarssen',
   linkedin: 'https://www.linkedin.com/in/ericklarssen',
   briefing: 'https://briefing-digital.vercel.app/',
