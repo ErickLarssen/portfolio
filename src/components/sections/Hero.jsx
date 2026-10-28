@@ -114,8 +114,9 @@ export default function Hero() {
       >
         <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full animate-spin-slow" aria-hidden="true">
           <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
-          <text className="font-mono text-[8.4px] fill-mist-700 tracking-[0.2em] uppercase">
-            <textPath href="#circlePath">{t.ring}</textPath>
+          {/* textLength = circunferência (2π·40): o texto ocupa a volta inteira em qualquer idioma, sem cortar o final. */}
+          <text className="font-mono text-[8.4px] fill-mist-700 tracking-[0.08em] uppercase">
+            <textPath href="#circlePath" textLength="251" lengthAdjust="spacing">{t.ring}</textPath>
           </text>
         </svg>
         <EagleMark className="w-12 h-12" />
