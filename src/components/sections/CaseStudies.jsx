@@ -1,7 +1,7 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { ArrowUpRight, Check } from 'lucide-react'
-import { useContent } from '../../i18n/context'
+import { ArrowUpRight, Check, Play } from 'lucide-react'
+import { useContent, useLanguage } from '../../i18n/context'
 import ScrollReveal from '../ui/ScrollReveal'
 import { GithubIcon } from '../ui/Brand'
 import proadesk from '../../assets/projects/proadesk.webp'
@@ -61,13 +61,73 @@ function TiltShot({ project }) {
   )
 }
 
+// Vídeo do YouTube com capa própria: nada do YouTube carrega até o clique,
+// e o player só entra (com som) quando o visitante pede.
+const VIDEO_FORMATS = {
+  landscape: { frame: 'hidden md:block aspect-video', thumb: 'maxresdefault' },
+  // O YouTube só gera miniatura 4:3 com faixas laterais para vídeos verticais;
+  // object-cover no quadro 9:16 recorta exatamente a área do vídeo.
+  portrait: { frame: 'md:hidden aspect-[9/16] max-w-[360px] mx-auto', thumb: 'sddefault' },
+}
+
+function VideoShot({ project }) {
+  const [playing, setPlaying] = useState(null)
+  const { lang } = useLanguage()
+  const t = useContent().ui.projects.video
+
+  return Object.entries(VIDEO_FORMATS).map(([format, { frame, thumb }]) => {
+    const id = project.video[format]
+    const captions = lang === 'en' ? '&cc_load_policy=1' : ''
+    return (
+      <div
+        key={format}
+        className={`relative w-full rounded-xl overflow-hidden border border-white/10 bg-ink-800 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] ${frame}`}
+      >
+        {playing === format ? (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&hl=${lang}&cc_lang_pref=${lang}${captions}`}
+            title={t.title(project.name)}
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            referrerPolicy="strict-origin-when-cross-origin"
+            className="absolute inset-0 w-full h-full"
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPlaying(format)}
+            className="group absolute inset-0 w-full h-full"
+            data-cursor="hover"
+            aria-label={t.play(project.name)}
+          >
+            <img
+              src={`https://i.ytimg.com/vi/${id}/${thumb}.jpg`}
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            />
+            <span className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/10 to-ink-950/20" />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="flex items-center justify-center w-20 h-20 rounded-full bg-gold text-ink-950 shadow-[0_0_40px_rgba(214,164,79,0.45)] transition-transform duration-300 group-hover:scale-110">
+                <Play size={30} fill="currentColor" className="ml-1" />
+              </span>
+            </span>
+            <span className="absolute left-5 bottom-4 font-mono text-[11px] uppercase tracking-widest text-mist-100/80">
+              {t.label}
+            </span>
+          </button>
+        )}
+      </div>
+    )
+  })
+}
+
 function ProjectRow({ project, index }) {
   const t = useContent().ui.projects
   const reverse = index % 2 === 1
   return (
     <article className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
       <ScrollReveal className={`lg:col-span-7 ${reverse ? 'lg:order-2' : ''}`}>
-        <TiltShot project={project} />
+        {project.video ? <VideoShot project={project} /> : <TiltShot project={project} />}
       </ScrollReveal>
 
       <ScrollReveal delay={0.1} className="lg:col-span-5">

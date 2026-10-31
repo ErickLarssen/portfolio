@@ -70,6 +70,11 @@ export default {
       code: 'Code',
       open: (name) => `Open ${name} in a new tab`,
       screenshot: (name) => `Screenshot of ${name}`,
+      video: {
+        play: (name) => `Play the ${name} video, with sound`,
+        title: (name) => `${name} video`,
+        label: 'Video · 1:15 · narrated in Portuguese',
+      },
     },
     stats: { label: 'Numbers' },
     testimonials: {
@@ -151,6 +156,20 @@ export default {
         'Atomic transactions and soft delete for traceability',
         'Two-layer validation with Zod',
         'Unit and integration tests',
+      ],
+    },
+    garagerick: {
+      kind: 'Personal site · Showcase',
+      highlight: 'My favorite cars and bikes, down to the Top 1',
+      problem:
+        'A passion project and sibling of CinErick: bringing together my favorite cars and motorcycles with the visual care of an automotive showroom, not just a plain list.',
+      solution:
+        'A static site with four rankings (everyday cars, sports cars, classics and motorcycles) counting down to the Top 1, a full-screen showcase with arrow and swipe navigation, search and a spec sheet for each vehicle.',
+      engineering: [
+        'Markdown content with Astro Content Collections',
+        'A build that fails if any ranking becomes inconsistent',
+        'Images optimized as AVIF and WebP',
+        'Security headers and long-term caching on Vercel',
       ],
     },
     briefing: {

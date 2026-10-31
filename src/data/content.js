@@ -32,6 +32,16 @@ const projects = [
     accent: 'from-[#1d3a8a]/50',
   },
   {
+    id: 'garagerick',
+    name: 'Garagerick',
+    // Vídeo no YouTube (não listado) no lugar da captura de tela: horizontal no desktop, vertical no celular.
+    video: { landscape: 'Tnluhnc9Cjc', portrait: 'hnNgl5TcOmw' },
+    stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Content Collections', 'ESLint', 'Prettier'],
+    live: 'https://garagerick.vercel.app/',
+    code: 'https://github.com/ErickLarssen/garagerick',
+    accent: 'from-crimson/40',
+  },
+  {
     id: 'briefing',
     name: 'Briefing Digital',
     image: 'briefing',

@@ -73,6 +73,11 @@ export default {
       code: 'Código',
       open: (name) => `Abrir ${name} em nova aba`,
       screenshot: (name) => `Tela do projeto ${name}`,
+      video: {
+        play: (name) => `Assistir ao vídeo do ${name}, com som`,
+        title: (name) => `Vídeo do ${name}`,
+        label: 'Vídeo · 1:15 · com narração',
+      },
     },
     stats: { label: 'Números' },
     testimonials: {
@@ -154,6 +159,20 @@ export default {
         'Transações atômicas e soft delete para rastreabilidade',
         'Validação em duas camadas com Zod',
         'Testes unitários e de integração',
+      ],
+    },
+    garagerick: {
+      kind: 'Site pessoal · Vitrine',
+      highlight: 'Meus carros e motos favoritos, até o Top 1',
+      problem:
+        'Um projeto de paixão, irmão do CinErick: reunir meus carros e motos favoritos com o cuidado visual de uma vitrine automotiva, e não numa lista comum.',
+      solution:
+        'Site estático com quatro rankings (populares, esportivos, antigos e motos) em contagem regressiva até o Top 1, vitrine em tela cheia com setas e gestos, busca e ficha técnica de cada veículo.',
+      engineering: [
+        'Conteúdo em Markdown com Content Collections do Astro',
+        'Build que falha se algum ranking ficar inconsistente',
+        'Imagens otimizadas em AVIF e WebP',
+        'Cabeçalhos de segurança e cache longo na Vercel',
       ],
     },
     briefing: {
