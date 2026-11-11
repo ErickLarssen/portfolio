@@ -32,10 +32,42 @@ const projects = [
     accent: 'from-[#1d3a8a]/50',
   },
   {
+    id: 'ecobyte',
+    name: 'EcoByte',
+    team: true, // projeto em grupo: o card diz "O que construímos" em vez de "O que eu fiz"
+    video: {
+      duration: '1:40',
+      landscape: { id: '-GhGmSVvQ4U', thumb: 'sddefault' },
+      portrait: { id: 'OFEeQ2vRvXI', thumb: 'maxresdefault' },
+    },
+    stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Node.js', 'Express', 'MongoDB', 'Vitest'],
+    live: 'https://eco-byte-neon.vercel.app/',
+    code: 'https://github.com/ErickLarssen/EcoByte',
+    accent: 'from-teal-700/40',
+  },
+  {
+    id: 'pitch',
+    name: 'Interactive Pitch Deck',
+    // Sem site publicado: roda offline, a partir do repositório. O card mostra só o link do código.
+    video: {
+      duration: '2:44',
+      landscape: { id: 'kU9uXXNsKdE', thumb: 'maxresdefault' },
+      portrait: { id: 'wibh5IX7-9g', thumb: 'maxresdefault' },
+    },
+    stack: ['React', 'TypeScript', 'Vite', 'GSAP', 'Zustand', 'Prism'],
+    code: 'https://github.com/ErickLarssen/interactive-pitch-deck',
+    accent: 'from-teal-700/40',
+  },
+  {
     id: 'garagerick',
     name: 'Garagerick',
-    // Vídeo no YouTube (não listado) no lugar da captura de tela: horizontal no desktop, vertical no celular.
-    video: { landscape: 'Tnluhnc9Cjc', portrait: 'hnNgl5TcOmw' },
+    // Vídeos no YouTube (não listados) no lugar da captura de tela: horizontal no desktop, vertical no celular.
+    // thumb: miniatura do YouTube usada como capa (nem todo vídeo tem maxresdefault; Shorts costumam ter só sddefault).
+    video: {
+      duration: '1:15',
+      landscape: { id: 'Tnluhnc9Cjc', thumb: 'maxresdefault' },
+      portrait: { id: 'hnNgl5TcOmw', thumb: 'sddefault' },
+    },
     stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Content Collections', 'ESLint', 'Prettier'],
     live: 'https://garagerick.vercel.app/',
     code: 'https://github.com/ErickLarssen/garagerick',

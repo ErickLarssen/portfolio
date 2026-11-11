@@ -69,6 +69,7 @@ export default {
       intro: 'Do sistema em uso numa escola pública ao projeto de paixão: cada um nasceu de um problema real.',
       problem: 'O problema',
       solution: 'O que eu fiz',
+      solutionTeam: 'O que construímos',
       view: 'Ver projeto',
       code: 'Código',
       open: (name) => `Abrir ${name} em nova aba`,
@@ -76,7 +77,7 @@ export default {
       video: {
         play: (name) => `Assistir ao vídeo do ${name}, com som`,
         title: (name) => `Vídeo do ${name}`,
-        label: 'Vídeo · 1:15 · com narração',
+        label: (duration) => `Vídeo · ${duration} · com narração`,
       },
     },
     stats: { label: 'Números' },
@@ -159,6 +160,34 @@ export default {
         'Transações atômicas e soft delete para rastreabilidade',
         'Validação em duas camadas com Zod',
         'Testes unitários e de integração',
+      ],
+    },
+    ecobyte: {
+      kind: 'Projeto Integrador · Fatec · Em equipe',
+      highlight: 'Coleta de lixo eletrônico em Diadema-SP',
+      problem:
+        'Quase todo mundo tem lixo eletrônico em casa e não sabe o que fazer com ele. Levar até um ponto de descarte exige tempo, transporte e informação, e muita coisa acaba no lixo comum.',
+      solution:
+        'Plataforma em que o cliente solicita a coleta a partir do CEP, um coletor recolhe o material e o leva ao ecoponto EcoByte, e o cliente acompanha cada etapa. Painéis para cliente, coletor e administração, com relatórios.',
+      engineering: [
+        'API Express em camadas, com máquina de estados validada no servidor',
+        'Relatórios com agregações do MongoDB ($facet, $lookup, $group)',
+        'Sessão em cookie HttpOnly, senhas com Argon2id e limites contra abuso',
+        'LGPD com exportação e exclusão de dados; testes e CI no GitHub Actions',
+      ],
+    },
+    pitch: {
+      kind: 'Ferramenta · Código aberto',
+      highlight: 'O pitch do EcoByte, feito como site',
+      problem:
+        'Defender o EcoByte para a banca com mais um PowerPoint não mostraria o que o projeto tinha de melhor, e a internet de auditório é sempre uma aposta arriscada.',
+      solution:
+        'Apresentação interativa em tela cheia, com cronômetro de apresentador, transições, zoom nos documentos do projeto e um slide com o código real ao lado do produto rodando. Funciona 100% offline, e o README ensina qualquer pessoa a reaproveitá-la.',
+      engineering: [
+        'Conteúdo separado do código: trocar o pitch é editar texto',
+        '15 tipos de slide prontos, da capa à demonstração',
+        'Build em um único arquivo HTML, que roda sem internet',
+        'Atalhos de teclado e modo apresentador com cronômetro',
       ],
     },
     garagerick: {

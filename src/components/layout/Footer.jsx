@@ -41,7 +41,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 text-sm text-mist-500">
               {projects.map((p) => (
                 <li key={p.id}>
-                  <a href={p.live} target="_blank" rel="noreferrer" className="hover:text-mist-100 transition-colors">{p.name}</a>
+                  <a href={p.live ?? p.code} target="_blank" rel="noreferrer" className="hover:text-mist-100 transition-colors">{p.name}</a>
                 </li>
               ))}
             </ul>

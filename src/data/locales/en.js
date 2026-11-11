@@ -66,6 +66,7 @@ export default {
       intro: 'From a system in daily use at a public school to a passion project: each one was born from a real problem.',
       problem: 'The problem',
       solution: 'What I built',
+      solutionTeam: 'What we built',
       view: 'View project',
       code: 'Code',
       open: (name) => `Open ${name} in a new tab`,
@@ -73,7 +74,7 @@ export default {
       video: {
         play: (name) => `Play the ${name} video, with sound`,
         title: (name) => `${name} video`,
-        label: 'Video · 1:15 · narrated in Portuguese',
+        label: (duration) => `Video · ${duration} · narrated in Portuguese`,
       },
     },
     stats: { label: 'Numbers' },
@@ -156,6 +157,34 @@ export default {
         'Atomic transactions and soft delete for traceability',
         'Two-layer validation with Zod',
         'Unit and integration tests',
+      ],
+    },
+    ecobyte: {
+      kind: 'Capstone project · Fatec · Team',
+      highlight: 'E-waste collection in Diadema, Brazil',
+      problem:
+        'Almost everyone has e-waste at home and doesn’t know what to do with it. Taking it to a drop-off point takes time, transport and information, so a lot of it ends up in the regular trash.',
+      solution:
+        'A platform where customers request a pickup starting from their postal code, a collector picks up the items and takes them to the EcoByte drop-off point, and the customer follows every step. Dashboards for customers, collectors and administrators, with reports.',
+      engineering: [
+        'Layered Express API with a server-validated state machine',
+        'Reports built on MongoDB aggregations ($facet, $lookup, $group)',
+        'HttpOnly session cookie, Argon2id passwords and abuse rate limits',
+        'Data export and deletion (Brazil’s LGPD); tests and CI on GitHub Actions',
+      ],
+    },
+    pitch: {
+      kind: 'Tool · Open source',
+      highlight: 'The EcoByte pitch, built as a website',
+      problem:
+        'Defending EcoByte before the examining board with yet another PowerPoint wouldn’t show the project at its best, and auditorium Wi-Fi is always a gamble.',
+      solution:
+        'A full-screen interactive presentation with a presenter timer, transitions, zoom into the project documents and a slide showing the real code next to the running product. It works 100% offline, and the README teaches anyone how to reuse it.',
+      engineering: [
+        'Content kept apart from the code: changing the pitch means editing text',
+        '15 ready-made slide types, from cover to live demo',
+        'Builds into a single HTML file that runs without internet',
+        'Keyboard shortcuts and a presenter mode with a timer',
       ],
     },
     garagerick: {

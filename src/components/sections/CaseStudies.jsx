@@ -63,11 +63,11 @@ function TiltShot({ project }) {
 
 // Vídeo do YouTube com capa própria: nada do YouTube carrega até o clique,
 // e o player só entra (com som) quando o visitante pede.
+// As miniaturas do YouTube vêm com faixas pretas (16:9 dentro de 4:3, ou vertical dentro
+// de 16:9); object-cover no quadro do formato recorta exatamente a área do vídeo.
 const VIDEO_FORMATS = {
-  landscape: { frame: 'hidden md:block aspect-video', thumb: 'maxresdefault' },
-  // O YouTube só gera miniatura 4:3 com faixas laterais para vídeos verticais;
-  // object-cover no quadro 9:16 recorta exatamente a área do vídeo.
-  portrait: { frame: 'md:hidden aspect-[9/16] max-w-[360px] mx-auto', thumb: 'sddefault' },
+  landscape: 'hidden md:block aspect-video',
+  portrait: 'md:hidden aspect-[9/16] max-w-[360px] mx-auto',
 }
 
 function VideoShot({ project }) {
@@ -75,8 +75,8 @@ function VideoShot({ project }) {
   const { lang } = useLanguage()
   const t = useContent().ui.projects.video
 
-  return Object.entries(VIDEO_FORMATS).map(([format, { frame, thumb }]) => {
-    const id = project.video[format]
+  return Object.entries(VIDEO_FORMATS).map(([format, frame]) => {
+    const { id, thumb } = project.video[format]
     const captions = lang === 'en' ? '&cc_load_policy=1' : ''
     return (
       <div
@@ -112,7 +112,7 @@ function VideoShot({ project }) {
               </span>
             </span>
             <span className="absolute left-5 bottom-4 font-mono text-[11px] uppercase tracking-widest text-mist-100/80">
-              {t.label}
+              {t.label(project.video.duration)}
             </span>
           </button>
         )}
@@ -132,7 +132,7 @@ function ProjectRow({ project, index }) {
 
       <ScrollReveal delay={0.1} className="lg:col-span-5">
         <div className="flex items-center gap-3 mb-4">
-          <span className="font-mono text-xs text-mist-900">0{index + 1}</span>
+          <span className="font-mono text-xs text-mist-900">{String(index + 1).padStart(2, '0')}</span>
           <span className="h-px w-8 bg-white/15" />
           <span className="font-mono text-xs text-mist-900 uppercase tracking-widest">{project.kind}</span>
         </div>
@@ -145,7 +145,7 @@ function ProjectRow({ project, index }) {
             <dd className="text-mist-700 leading-relaxed">{project.problem}</dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-widest text-mist-900 mb-1">{t.solution}</dt>
+            <dt className="font-mono text-[10px] uppercase tracking-widest text-mist-900 mb-1">{project.team ? t.solutionTeam : t.solution}</dt>
             <dd className="text-mist-500 leading-relaxed">{project.solution}</dd>
           </div>
         </dl>
@@ -170,9 +170,11 @@ function ProjectRow({ project, index }) {
         </div>
 
         <div className="flex flex-wrap gap-6 font-mono text-sm">
-          <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light">
-            {t.view} <ArrowUpRight size={16} />
-          </a>
+          {project.live && (
+            <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light">
+              {t.view} <ArrowUpRight size={16} />
+            </a>
+          )}
           <a href={project.code} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-mist-900 hover:text-mist-100">
             <GithubIcon size={16} /> {t.code}
           </a>

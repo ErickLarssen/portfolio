@@ -125,7 +125,7 @@ export default function Hero() {
       <div className="absolute bottom-8 left-6 md:left-12 z-20 hidden sm:block">
         <div className="flex flex-col gap-1 items-start">
           <span className="font-display text-3xl text-gold">
-            <AnimatedCounter end={projects.length} />
+            <AnimatedCounter end={projects.filter((p) => p.live).length} />
           </span>
           <span className="font-mono text-xs text-mist-900 tracking-wider">{t.live}</span>
         </div>
