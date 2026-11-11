@@ -72,6 +72,7 @@ export default {
       open: (name) => `Open ${name} in a new tab`,
       screenshot: (name) => `Screenshot of ${name}`,
       all: (count) => `See all ${count} projects`,
+      desktopOnly: 'Built for large screens · open it on a computer',
       video: {
         play: (name) => `Play the ${name} video, with sound`,
         title: (name) => `${name} video`,

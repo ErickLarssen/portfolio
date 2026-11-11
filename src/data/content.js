@@ -51,6 +51,9 @@ const projects = [
     id: 'pitch',
     name: 'Interactive Pitch Deck',
     // Também roda offline (build em um único HTML); a versão publicada fica na Vercel.
+    // desktopOnly: feito para telão; abaixo de 1024px o card troca "Ver projeto" por um aviso
+    // (o próprio pitch mostra uma tela de aviso no celular, com o mesmo limite).
+    desktopOnly: true,
     video: {
       duration: '2:44',
       landscape: { id: 'kU9uXXNsKdE', thumb: 'maxresdefault' },

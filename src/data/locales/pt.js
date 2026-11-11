@@ -75,6 +75,7 @@ export default {
       open: (name) => `Abrir ${name} em nova aba`,
       screenshot: (name) => `Tela do projeto ${name}`,
       all: (count) => `Ver todos os ${count} projetos`,
+      desktopOnly: 'Feito para telas grandes · abra no computador',
       video: {
         play: (name) => `Assistir ao vídeo do ${name}, com som`,
         title: (name) => `Vídeo do ${name}`,

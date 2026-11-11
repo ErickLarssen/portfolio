@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { ArrowUpRight, Check, Play } from 'lucide-react'
+import { ArrowUpRight, Check, Monitor, Play } from 'lucide-react'
 import { useContent, useLanguage } from '../../i18n/context'
 import ScrollReveal from '../ui/ScrollReveal'
 import { GithubIcon } from '../ui/Brand'
@@ -171,9 +171,19 @@ export default function ProjectRow({ project, index }) {
 
         <div className="flex flex-wrap gap-6 font-mono text-sm">
           {project.live && (
-            <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light">
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noreferrer"
+              className={`${project.desktopOnly ? 'hidden lg:inline-flex' : 'inline-flex'} items-center gap-1.5 text-gold hover:text-gold-light`}
+            >
               {t.view} <ArrowUpRight size={16} />
             </a>
+          )}
+          {project.live && project.desktopOnly && (
+            <span className="lg:hidden inline-flex items-center gap-2 text-mist-900">
+              <Monitor size={16} aria-hidden="true" /> {t.desktopOnly}
+            </span>
           )}
           <a href={project.code} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-mist-900 hover:text-mist-100">
             <GithubIcon size={16} /> {t.code}
