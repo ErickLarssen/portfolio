@@ -50,13 +50,14 @@ const projects = [
   {
     id: 'pitch',
     name: 'Interactive Pitch Deck',
-    // Sem site publicado: roda offline, a partir do repositório. O card mostra só o link do código.
+    // Também roda offline (build em um único HTML); a versão publicada fica na Vercel.
     video: {
       duration: '2:44',
       landscape: { id: 'kU9uXXNsKdE', thumb: 'maxresdefault' },
       portrait: { id: 'wibh5IX7-9g', thumb: 'maxresdefault' },
     },
     stack: ['React', 'TypeScript', 'Vite', 'GSAP', 'Zustand', 'Prism'],
+    live: 'https://interactive-pitch-deck-two.vercel.app/',
     code: 'https://github.com/ErickLarssen/interactive-pitch-deck',
     accent: 'from-teal-700/40',
   },
