@@ -24,6 +24,7 @@ const profile = {
 const projects = [
   {
     id: 'proadesk',
+    featured: true, // aparece na home; todos aparecem em /projetos
     name: 'ProaDesk',
     image: 'proadesk',
     stack: ['React', 'Node.js', 'Express', 'Prisma', 'MySQL', 'TanStack Query', 'Zod', 'Jest'],
@@ -33,6 +34,7 @@ const projects = [
   },
   {
     id: 'ecobyte',
+    featured: true, // aparece na home; todos aparecem em /projetos
     name: 'EcoByte',
     team: true, // projeto em grupo: o card diz "O que construímos" em vez de "O que eu fiz"
     video: {
@@ -60,6 +62,7 @@ const projects = [
   },
   {
     id: 'garagerick',
+    featured: true, // aparece na home; todos aparecem em /projetos
     name: 'Garagerick',
     // Vídeos no YouTube (não listados) no lugar da captura de tela: horizontal no desktop, vertical no celular.
     // thumb: miniatura do YouTube usada como capa (nem todo vídeo tem maxresdefault; Shorts costumam ter só sddefault).

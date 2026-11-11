@@ -18,7 +18,7 @@ export default {
   },
 
   ui: {
-    skipToProjects: 'Skip to projects',
+    skipToContent: 'Skip to content',
     language: 'Language',
     cursorOpen: 'OPEN',
     nav: {
@@ -71,11 +71,21 @@ export default {
       code: 'Code',
       open: (name) => `Open ${name} in a new tab`,
       screenshot: (name) => `Screenshot of ${name}`,
+      all: (count) => `See all ${count} projects`,
       video: {
         play: (name) => `Play the ${name} video, with sound`,
         title: (name) => `${name} video`,
         label: (duration) => `Video · ${duration} · narrated in Portuguese`,
       },
+    },
+    projectsPage: {
+      metaTitle: 'Projects | Erick Silva',
+      metaDescription: 'All projects by Erick Silva, full-stack developer: systems in production, team projects, open-source tools and personal projects.',
+      back: 'Back to home',
+      eyebrow: 'Full portfolio',
+      title: 'All',
+      titleAccent: 'projects.',
+      intro: (count) => `${count} projects, from systems in production to open tools and passion projects. Each one with the problem it solves and how it was built.`,
     },
     stats: { label: 'Numbers' },
     testimonials: {

@@ -20,7 +20,7 @@ export default {
   },
 
   ui: {
-    skipToProjects: 'Pular para os projetos',
+    skipToContent: 'Pular para o conteúdo',
     language: 'Idioma',
     cursorOpen: 'ABRIR',
     nav: {
@@ -74,11 +74,21 @@ export default {
       code: 'Código',
       open: (name) => `Abrir ${name} em nova aba`,
       screenshot: (name) => `Tela do projeto ${name}`,
+      all: (count) => `Ver todos os ${count} projetos`,
       video: {
         play: (name) => `Assistir ao vídeo do ${name}, com som`,
         title: (name) => `Vídeo do ${name}`,
         label: (duration) => `Vídeo · ${duration} · com narração`,
       },
+    },
+    projectsPage: {
+      metaTitle: 'Projetos | Erick Silva',
+      metaDescription: 'Todos os projetos de Erick Silva, desenvolvedor full-stack: sistemas em produção, projetos em equipe, ferramentas de código aberto e projetos pessoais.',
+      back: 'Voltar ao início',
+      eyebrow: 'Portfólio completo',
+      title: 'Todos os',
+      titleAccent: 'projetos.',
+      intro: (count) => `${count} projetos, de sistemas em produção a ferramentas abertas e projetos de paixão. Cada um com o problema que resolve e como foi construído.`,
     },
     stats: { label: 'Números' },
     testimonials: {

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { content, languages } from '../data/content'
 import { LanguageContext } from './context'
 
@@ -16,33 +17,30 @@ function initialLang() {
   return (navigator.language || 'pt').toLowerCase().startsWith('pt') ? 'pt' : 'en'
 }
 
-function persist(lang) {
-  try { localStorage.setItem(STORAGE_KEY, lang) } catch { /* ignora */ }
-  // Mantém um link com ?lang= coerente com a escolha atual.
-  const url = new URL(window.location.href)
-  if (url.searchParams.has('lang')) {
-    url.searchParams.set('lang', lang)
-    window.history.replaceState(null, '', url)
-  }
-}
-
 export default function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(initialLang)
+  const location = useLocation()
+  const navigate = useNavigate()
 
+  // Título e descrição ficam a cargo de cada página (useDocumentMeta).
   useEffect(() => {
-    const { meta } = content[lang]
-    document.documentElement.lang = meta.htmlLang
-    document.title = meta.title
-    document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description)
+    document.documentElement.lang = content[lang].meta.htmlLang
   }, [lang])
 
   const value = useMemo(() => ({
     lang,
     setLang: (next) => {
       setLangState(next)
-      persist(next)
+      try { localStorage.setItem(STORAGE_KEY, next) } catch { /* ignora */ }
+      // Mantém um link com ?lang= coerente com a escolha atual, pelo roteador,
+      // para os links internos herdarem o idioma certo. keepScroll evita rolar até a âncora.
+      const params = new URLSearchParams(location.search)
+      if (params.has('lang')) {
+        params.set('lang', next)
+        navigate({ ...location, search: `?${params}` }, { replace: true, state: { keepScroll: true } })
+      }
     },
-  }), [lang])
+  }), [lang, location, navigate])
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
 }

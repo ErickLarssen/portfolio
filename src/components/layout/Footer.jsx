@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom'
 import { EagleMark, GithubIcon, LinkedinIcon, WhatsappIcon } from '../ui/Brand'
 import { useContent } from '../../i18n/context'
 
@@ -7,16 +8,17 @@ export default function Footer() {
   const year = new Date().getFullYear()
   const { profile, projects, ui } = useContent()
   const t = ui.footer
+  const { search } = useLocation()
 
   return (
     <footer className="bg-ink-950 border-t border-white/5 pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-20">
           <div>
-            <a href="#inicio" className="inline-flex items-center gap-3 mb-6">
+            <Link to={{ pathname: '/', search, hash: '#inicio' }} className="inline-flex items-center gap-3 mb-6">
               <EagleMark className="w-10 h-10" title="" />
               <span className="font-body text-sm font-bold tracking-[0.25em] uppercase">Erick Silva</span>
-            </a>
+            </Link>
             <p className="text-mist-900 text-sm mb-6 leading-relaxed max-w-xs">
               {profile.role}. {profile.tagline}
             </p>
@@ -31,7 +33,7 @@ export default function Footer() {
             <h4 className="font-mono text-xs text-gold uppercase tracking-widest mb-6">{t.nav}</h4>
             <ul className="flex flex-col gap-3 text-sm text-mist-500">
               {links.map((id) => (
-                <li key={id}><a href={`#${id}`} className="hover:text-mist-100 transition-colors">{t.links[id]}</a></li>
+                <li key={id}><Link to={{ pathname: '/', search, hash: `#${id}` }} className="hover:text-mist-100 transition-colors">{t.links[id]}</Link></li>
               ))}
             </ul>
           </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import MagneticButton from '../ui/MagneticButton'
@@ -7,13 +8,22 @@ import { EagleMark, GithubIcon, LinkedinIcon, WhatsappIcon } from '../ui/Brand'
 import { useContent } from '../../i18n/context'
 
 const sections = ['sobre', 'projetos', 'servicos', 'processo', 'recrutadores', 'contato']
+const MotionLink = motion.create(Link)
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const { scrollY } = useScroll()
   const { profile, ui } = useContent()
-  const navLinks = sections.map((id) => ({ label: ui.nav.links[id], href: `#${id}` }))
+  const { pathname, search } = useLocation()
+  // "Projetos" abre a página com todos os projetos; os demais itens são seções da home.
+  // search mantém o ?lang= ao navegar.
+  const navLinks = sections.map((id) => ({
+    id,
+    label: ui.nav.links[id],
+    to: id === 'projetos' ? { pathname: '/projetos', search } : { pathname: '/', search, hash: `#${id}` },
+    current: id === 'projetos' && pathname === '/projetos',
+  }))
 
   useMotionValueEvent(scrollY, 'change', (latest) => setScrolled(latest > 80))
 
@@ -31,17 +41,22 @@ export default function Navbar() {
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          <a href="#inicio" className="flex items-center gap-3 z-50" aria-label={ui.nav.home}>
+          <Link to={{ pathname: '/', search, hash: '#inicio' }} className="flex items-center gap-3 z-50" aria-label={ui.nav.home}>
             <EagleMark className="w-9 h-9" title="" />
             <span className="font-body text-sm font-bold tracking-[0.25em] uppercase text-mist-100 whitespace-nowrap">Erick Silva</span>
-          </a>
+          </Link>
 
           <nav className="hidden lg:flex items-center gap-5 xl:gap-8" aria-label={ui.nav.main}>
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="font-body text-sm text-mist-900 hover:text-mist-100 transition-colors relative group">
+              <Link
+                key={link.id}
+                to={link.to}
+                aria-current={link.current ? 'page' : undefined}
+                className={`font-body text-sm hover:text-mist-100 transition-colors relative group ${link.current ? 'text-mist-100' : 'text-mist-900'}`}
+              >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 h-px bg-gold w-0 group-hover:w-full transition-all duration-300" />
-              </a>
+                <span className={`absolute -bottom-1 left-0 h-px bg-gold group-hover:w-full transition-all duration-300 ${link.current ? 'w-full' : 'w-0'}`} />
+              </Link>
             ))}
           </nav>
 
@@ -83,17 +98,18 @@ export default function Navbar() {
           >
             <nav className="flex flex-col gap-5 mt-10" aria-label={ui.nav.menu}>
               {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
+                <MotionLink
+                  key={link.id}
+                  to={link.to}
+                  aria-current={link.current ? 'page' : undefined}
                   initial={{ x: -60, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.06, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="font-display text-5xl text-mist-100 hover:text-gold transition-colors"
+                  className={`font-display text-5xl hover:text-gold transition-colors ${link.current ? 'text-gold' : 'text-mist-100'}`}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
-                </motion.a>
+                </MotionLink>
               ))}
             </nav>
             <motion.div
